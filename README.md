@@ -1,0 +1,28 @@
+# C++ Compiling Technology Tutorial
+
+## Table of contents
+
+### [生成可执行程序](build_stages)
+
+- [预处理阶段](build_stages/preprocessing)
+- [汇编阶段](build_stages/assembling)
+- [输出目标文件阶段（以及反汇编）](build_stages/object_files_and_disassembling)
+- [链接阶段](build_stages/linking)
+
+### [静态库](static_library)
+
+- [创建静态库](static_library/build_a)
+- [静态库工具ar](static_library/manipulate_a)
+- [将静态库转换成动态库](static_library/manipulate_a)
+
+### [动态库](dynamic_library)
+
+- [创建动态库](dynamic_library/build_so)
+- [控制动态库符号的可见性](dynamic_library/export_symbol_visibility_control)
+- [动态库完成链接需要满足的条件](dynamic_library/build_so_no_undefined)
+- [通过rpath添加加载动态库文件搜索路径](dynamic_library/load_so_by_rpath)
+- [通过runpath添加加载动态库文件搜索路径](dynamic_library/load_so_by_runpath)
+- [运行时动态链接](dynamic_library/load_so_by_dlopen)
+- [静态编译](dynamic_library/static_build)
+- [导入完整归档的情况](dynamic_library/build_so_whole_archive)
+
