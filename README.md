@@ -6,7 +6,7 @@
 
 - [预处理阶段](build_stages/preprocessing)
 - [语法分析阶段](build_stages/linguistic_analysis)
-- [汇编阶段](build_stages/assembling)
+- [汇编阶段/优化阶段](build_stages/assembling_and_optimization)
 - [输出目标文件阶段（以及反汇编）](build_stages/object_files_and_disassembling)
 - [链接阶段](build_stages/linking)
 
