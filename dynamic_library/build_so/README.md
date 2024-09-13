@@ -5,10 +5,13 @@
 - -shared连接器选项。
 
 下面的简单示例演示了从两个源代码文件创建动态库的过程：
-```shell
+
+```
 $ gcc -fPIC -c first.c second.c
 $ gcc -shared first.o second.o -o libdynamiclib.so
 ```
+
+按照 Linux 约定，动态库以前缀 `lib` 开头，文件扩展名为 `.so`。
 
 ### Linux构建过程中库文件定位规则
 
