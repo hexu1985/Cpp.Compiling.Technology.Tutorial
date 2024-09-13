@@ -10,11 +10,14 @@
 - [输出目标文件阶段（以及反汇编）](build_stages/object_files_and_disassembling)
 - [链接阶段](build_stages/linking)
 
+
 ### [静态库](static_library)
 
 - [创建静态库](static_library/build_a)
+- [链接静态库](static_library/link_a)
 - [静态库工具ar](static_library/manipulate_a)
 - [将静态库转换成动态库](static_library/manipulate_a)
+
 
 ### [动态库](dynamic_library)
 
