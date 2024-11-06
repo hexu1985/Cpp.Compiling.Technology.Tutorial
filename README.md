@@ -16,7 +16,7 @@
 - [创建静态库](static_library/build_a)
 - [链接静态库](static_library/link_a)
 - [静态库工具ar](static_library/manipulate_a)
-- [将静态库转换成动态库](static_library/manipulate_a)
+- [将静态库转换成动态库](static_library/convert_a_to_so)
 
 
 ### [动态库](dynamic_library)
