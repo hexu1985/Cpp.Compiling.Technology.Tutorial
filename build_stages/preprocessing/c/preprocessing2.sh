@@ -1,3 +1,3 @@
 #!/bin/bash
 
-gcc -E -P function.c -o function.i
+gcc -E -P function.c -o function2.i
