@@ -139,5 +139,5 @@ main2.cpp:17:5: note: old declaration ‘int function_with_duplicated_name(int)�
 
 
 #### 参考资料:
-《高级C/C++编译技术》: 9.1 重复的符号定义
-
+- 《高级C/C++编译技术》: 9.1 重复的符号定义
+- Advanced.C.And.Cpp.Compiling/src/duplicateSymbolsHandlingResearch/01_duplicateSymbolsCriteria/01_duplicateSymbolsC_vs_C++

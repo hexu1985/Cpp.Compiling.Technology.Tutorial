@@ -144,6 +144,6 @@ nRetValue = 6
 ```
 
 #### 参考资料:
-《高级C/C++编译技术》: 9.4.1 案例1：客户二进制文件符号与动态库ABI函数冲突
-
+- 《高级C/C++编译技术》: 9.4.1 案例1：客户二进制文件符号与动态库ABI函数冲突
+- Advanced.C.And.Cpp.Compiling/src/duplicateSymbolsHandlingResearch/02_staticLibDuplicatesShlibABISymbol
 

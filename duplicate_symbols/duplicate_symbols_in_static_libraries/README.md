@@ -181,5 +181,5 @@ libsecond: local_staticlib_duplicate_function
 
 
 #### 参考资料:
-《高级C/C++编译技术》: 9.2 重复符号的默认处理
-
+- 《高级C/C++编译技术》: 9.2 重复符号的默认处理
+- Advanced.C.And.Cpp.Compiling/src/duplicateSymbolsHandlingResearch/01_duplicateSymbolsCriteria/02_duplicatesInTwoStaticLibs

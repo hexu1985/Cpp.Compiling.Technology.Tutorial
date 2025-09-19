@@ -147,5 +147,5 @@ shlibFirst: local_shlib_duplicate_function
 
 
 #### 参考资料:
-《高级C/C++编译技术》: 9.3 在动态库链接过程中处理重复符号
-
+- 《高级C/C++编译技术》: 9.3 在动态库链接过程中处理重复符号
+- Advanced.C.And.Cpp.Compiling/src/duplicateSymbolsHandlingResearch/01_duplicateSymbolsCriteria/03_duplicatesInTwoSharedLibs
