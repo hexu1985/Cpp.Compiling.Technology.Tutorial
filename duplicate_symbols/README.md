@@ -7,4 +7,5 @@
 - [不同动态库的ABI符号冲突](abi_symbols_of_different_dynamic_libraries_collide)
 - [动态库ABI符号和另一个动态库局部符号冲突](dynamic_library_abi_symbol_collides_with_another_dynamic_library_local_symbol)
 - [两个未导出的动态库符号冲突](duplicate_symbols_of_non_exported_symbol_dynamic_libraries)
+- [静态库中的单例](singleton_in_static_library)
 
