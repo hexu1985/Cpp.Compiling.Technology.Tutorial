@@ -42,3 +42,6 @@
 - [两个未导出的动态库符号冲突](duplicate_symbols/duplicate_symbols_of_non_exported_symbol_dynamic_libraries)
 - [静态库中的单例](duplicate_symbols/singleton_in_static_library)
 
+### [Linux工具集](linux_toolbox)
+
+- [file命令](linux_toolbox/file_command)
