@@ -46,3 +46,7 @@
 
 - [file命令](linux_toolbox/file_command)
 - [size命令](linux_toolbox/size_command)
+- [ldd命令](linux_toolbox/ldd_command)
+
+
+
