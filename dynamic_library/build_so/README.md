@@ -36,5 +36,5 @@ $ gcc -Wall -fPIC main.cpp -Wl,-L../sharedLib -Wl,-lworkingdemo -o demo
 ```
 
 #### 参考资料:
-《高级C/C++编译技术》: 6.1.1 在Linux中创建动态库
-《高级C/C++编译技术》: 7.2.1 Linux构建过程中库文件定位规则
+- 《高级C/C++编译技术》: 6.1.1 在Linux中创建动态库
+- 《高级C/C++编译技术》: 7.2.1 Linux构建过程中库文件定位规则

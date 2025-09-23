@@ -9,7 +9,10 @@ $ file /usr/bin/gst-inspect-1.0
 $
 $ file /usr/lib/x86_64-linux-gnu/libpthread.a 
 /usr/lib/x86_64-linux-gnu/libpthread.a: current ar archive
+$
 $ file /lib/x86_64-linux-gnu/libc.so.6 
 /lib/x86_64-linux-gnu/libc.so.6: ELF 64-bit LSB shared object, x86-64, version 1 (GNU/Linux), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=d5197096f709801829b118af1b7cf6631efa2dcd, for GNU/Linux 3.2.0, stripped
 ```
 
+#### 参考资料:
+《高级C/C++编译技术》: 12.1.1 file实用程序

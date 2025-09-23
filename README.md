@@ -45,3 +45,4 @@
 ### [Linux工具集](linux_toolbox)
 
 - [file命令](linux_toolbox/file_command)
+- [size命令](linux_toolbox/size_command)
