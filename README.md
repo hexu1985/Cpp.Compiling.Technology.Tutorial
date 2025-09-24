@@ -49,6 +49,10 @@
 - [size命令](linux_toolbox/size_command)
 - [ldd命令](linux_toolbox/ldd_command)
 - [nm命令](linux_toolbox/nm_command)
+- [objdump命令](linux_toolbox/objdump_command)
 
 
+### [二进制分析](binary_analysis)
+
+- [反汇编二进制文件](binary_analysis/disassembling_the_binary_file)
 
