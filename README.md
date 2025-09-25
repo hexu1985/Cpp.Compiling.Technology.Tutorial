@@ -50,6 +50,7 @@
 - [ldd命令](linux_toolbox/ldd_command)
 - [nm命令](linux_toolbox/nm_command)
 - [objdump命令](linux_toolbox/objdump_command)
+- [readelf命令](linux_toolbox/readelf_command)
 
 
 ### [二进制分析](binary_analysis)
