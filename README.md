@@ -56,5 +56,6 @@
 
 ### [二进制分析](binary_analysis)
 
+- [链接过程调试](binary_analysis/debugging_the_linking)
 - [反汇编二进制文件](binary_analysis/disassembling_the_binary_file)
 
