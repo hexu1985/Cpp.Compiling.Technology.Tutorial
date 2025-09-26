@@ -51,6 +51,7 @@
 - [nm命令](linux_toolbox/nm_command)
 - [objdump命令](linux_toolbox/objdump_command)
 - [readelf命令](linux_toolbox/readelf_command)
+- [strace命令](linux_toolbox/strace_command)
 
 
 ### [二进制分析](binary_analysis)

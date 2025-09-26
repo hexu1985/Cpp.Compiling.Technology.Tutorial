@@ -6,3 +6,4 @@
 - [nm命令](nm_command)
 - [objdump命令](objdump_command)
 - [readelf命令](readelf_command)
+- [strace命令](strace_command)
