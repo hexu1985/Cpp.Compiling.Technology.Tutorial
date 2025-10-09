@@ -58,4 +58,5 @@
 
 - [链接过程调试](binary_analysis/debugging_the_linking)
 - [反汇编二进制文件](binary_analysis/disassembling_the_binary_file)
+- [判断二进制文件类型](binary_analysis/determining_the_binary_file_type)
 
