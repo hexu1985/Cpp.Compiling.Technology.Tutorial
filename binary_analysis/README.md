@@ -6,4 +6,5 @@
 - [确定可执行文件入口点](determining_the_executable_entry_point)
 - [确定动态库入口点](determining_the_dynamic_library_entry_point)
 - [列出符号信息](list_symbols)
+- [列出与查看节信息](list_and_examine_sections)
 
