@@ -63,4 +63,6 @@
 - [确定动态库入口点](binary_analysis/determining_the_dynamic_library_entry_point)
 - [列出符号信息](binary_analysis/list_symbols)
 - [列出与查看节信息](binary_analysis/list_and_examine_sections)
+- [列出与查看段信息](binary_analysis/list_and_examine_segments)
+
 
