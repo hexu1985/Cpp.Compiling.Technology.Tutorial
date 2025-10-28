@@ -8,4 +8,6 @@
 - [列出符号信息](list_symbols)
 - [列出与查看节信息](list_and_examine_sections)
 - [列出与查看段信息](list_and_examine_segments)
+- [反汇编二进制文件](disassembling_the_binary_file)
+- [反汇编正在运行的进程](disassembling_the_running_process)
 
