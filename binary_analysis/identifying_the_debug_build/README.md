@@ -79,5 +79,5 @@ if readelf --debug-dump=line $1 > /dev/null; then echo "$1 is built for debug"; 
 ```
 
 #### 参考资料:
-《高级C/C++编译技术》: 12.2.4 readelf，13.8 判断是否为调试构建
+《高级C/C++编译技术》: 13.8 判断是否为调试构建
 

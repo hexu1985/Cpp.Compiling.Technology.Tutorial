@@ -11,4 +11,5 @@
 - [反汇编二进制文件](disassembling_the_binary_file)
 - [反汇编正在运行的进程](disassembling_the_running_process)
 - [判断是否为调试构建](identifying_the_debug_build)
+- [列出加载时依赖项](listing_load_time_dependencies)
 
