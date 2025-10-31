@@ -68,5 +68,6 @@
 - [反汇编正在运行的进程](binary_analysis/disassembling_the_running_process)
 - [判断是否为调试构建](binary_analysis/identifying_the_debug_build)
 - [列出加载时依赖项](binary_analysis/listing_load_time_dependencies)
+- [查看运行时动态链接的库文件](binary_analysis/listing_dynamically_linked_libraries)
 
 

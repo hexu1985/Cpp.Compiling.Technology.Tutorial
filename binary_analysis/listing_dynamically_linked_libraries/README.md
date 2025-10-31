@@ -310,4 +310,273 @@ ffffffffff600000-ffffffffff601000 --xp 00000000 00:00 0                  [vsysca
 $ cat /proc/`pgrep firefox`/maps
 ```
 
+**lsof 工具**
+
+lsof 实用程序可分析运行中的进程，并在标准输出流中打印进程打开的所有文件列表。
+打开的文件可以是常规文件、目录、块特殊文件、字符特殊文件、执行文本引用、库文件、流或网络文件（互联网套接字、NFS 文件或 UNIX 域套接字）。
+
+在它报告的各种已打开文件类型中，还会包含由进程加载的动态库列表，无论这些库是通过静态链接还是动态加载（在运行时通过 dlopen 调用）方式载入的。
+
+以下代码片段演示了如何获取 Firefox 浏览器打开的所有共享库列表：
+
+```bash
+$ lsof -p 5953 | grep '.so'
+firefox 5953 hexu  mem       REG                7,9             10834 /snap/firefox/7177/gnome-platform/usr/lib/x86_64-linux-gnu/libicudata.so.70.1 (stat: No such file or directory)
+firefox 5953 hexu  mem       REG                7,9             10849 /snap/firefox/7177/gnome-platform/usr/lib/x86_64-linux-gnu/libicuuc.so.70.1 (stat: No such file or directory)
+firefox 5953 hexu  mem       REG                7,9             11311 /snap/firefox/7177/gnome-platform/usr/lib/x86_64-linux-gnu/libxml2.so.2.9.13 (stat: No such file or directory)
+firefox 5953 hexu  mem       REG                7,9               870 /snap/firefox/7177/gnome-platform/usr/lib/librsvg-2.so.2.48.0 (stat: No such file or directory)
+firefox 5953 hexu  mem       REG                7,9              9678 /snap/firefox/7177/gnome-platform/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-svg.so (stat: No such file or directory)
+firefox 5953 hexu  mem       REG                7,9             11289 /snap/firefox/7177/gnome-platform/usr/lib/x86_64-linux-gnu/libxcb-randr.so.0.1.0 (stat: No such file or directory)
+firefox 5953 hexu  mem       REG                7,9             11257 /snap/firefox/7177/gnome-platform/usr/lib/x86_64-linux-gnu/libwayland-server.so.0.22.0 (stat: No such file or directory)
+firefox 5953 hexu  mem       REG                7,4    378952     326 /snap/firefox/7177/usr/lib/x86_64-linux-gnu/libopus.so.0.8.0
+firefox 5953 hexu  mem       REG                7,9             11233 /snap/firefox/7177/gnome-platform/usr/lib/x86_64-linux-gnu/libvorbisenc.so.2.0.12 (stat: No such file or directory)
+firefox 5953 hexu  mem       REG                7,9             11231 /snap/firefox/7177/gnome-platform/usr/lib/x86_64-linux-gnu/libvorbis.so.0.4.9 (stat: No such file or directory)
+firefox 5953 hexu  mem       REG                7,9             10297 /snap/firefox/7177/gnome-platform/usr/lib/x86_64-linux-gnu/libFLAC.so.8.3.0 (stat: No such file or directory)
+firefox 5953 hexu  mem       REG                7,9             11111 /snap/firefox/7177/gnome-platform/usr/lib/x86_64-linux-gnu/libsndfile.so.1.0.31 (stat: No such file or directory)firefox 5953 hexu  mem       REG                7,9             11818 /snap/firefox/7177/gnome-platform/usr/lib/x86_64-linux-gnu/pulseaudio/libpulsecommon-15.99.so (stat: No such file or directory)
+...
+firefox 5953 hexu  mem       REG                7,4    409200     289 /snap/firefox/7177/usr/lib/firefox/libssl3.so
+firefox 5953 hexu  mem       REG                7,4   1449136     280 /snap/firefox/7177/usr/lib/firefox/libmozsqlite3.so
+firefox 5953 hexu  mem       REG                7,4    169096     287 /snap/firefox/7177/usr/lib/firefox/libsmime3.so
+firefox 5953 hexu  mem       REG                7,4    739152     283 /snap/firefox/7177/usr/lib/firefox/libnss3.so
+firefox 5953 hexu  mem       REG                7,4    184712     284 /snap/firefox/7177/usr/lib/firefox/libnssutil3.so
+firefox 5953 hexu  mem       REG                7,4    179200     274 /snap/firefox/7177/usr/lib/firefox/liblgpllibs.so
+firefox 5953 hexu  mem       REG                7,4   8539912     273 /snap/firefox/7177/usr/lib/firefox/libgkcodecs.so
+firefox 5953 hexu  mem       REG                7,4    172704     279 /snap/firefox/7177/usr/lib/firefox/libmozsandbox.so
+firefox 5953 hexu  mem       REG                7,4    210000     282 /snap/firefox/7177/usr/lib/firefox/libnspr4.so
+firefox 5953 hexu  mem       REG                7,2              7511 /usr/lib/x86_64-linux-gnu/libc.so.6 (path dev=8,2, inode=3410336)
+firefox 5953 hexu  mem       REG                7,2              7561 /usr/lib/x86_64-linux-gnu/libgcc_s.so.1 (path dev=8,2, inode=3419500)
+firefox 5953 hexu  mem       REG                7,2              7612 /usr/lib/x86_64-linux-gnu/libm.so.6 (path dev=8,2, inode=3410339)
+firefox 5953 hexu  mem       REG                7,4      4112     277 /snap/firefox/7177/usr/lib/firefox/libmozgtk.so
+firefox 5953 hexu  mem       REG                7,4     12048     286 /snap/firefox/7177/usr/lib/firefox/libplds4.so
+firefox 5953 hexu  mem       REG                7,4     16232     285 /snap/firefox/7177/usr/lib/firefox/libplc4.so
+firefox 5953 hexu  mem       REG                7,9             11130 /snap/firefox/7177/gnome-platform/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30 (stat: No such file or directory)
+firefox 5953 hexu  mem       REG                7,9               300 /snap/firefox/7177/gnome-platform/lib/x86_64-linux-gnu/bindtextdomain.so (stat: No such file or directory)
+firefox 5953 hexu  mem       REG                7,2              7482 /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2 (path dev=8,2, inode=3410333)
+```
+
+备注：
+如果确认当前系统中只有一个该程序的实例在运行，可以结合使用pgrep（进程查找）命令来避免手动查找进程ID的步骤。以Firefox浏览器为例，只需执行：
+
+```bash
+$ lsof -p `pgrep firefox`
+```
+
+请注意，lsof 提供了定期检查进程的命令行选项。通过设定检测周期，您可能捕捉到运行时动态加载和卸载发生的瞬间。
+
+使用 `-r` 选项运行 lsof 时，周期性的进程检查会无限循环执行，需要用户按下 `Ctrl-C` 才能终止。
+而使用 `+r` 选项运行 lsof 时，当检测不到任何已打开文件后，lsof 将自动终止运行。
+
+
+**编程化方法**
+
+同样可以通过编写代码来输出进程加载的库信息。
+当应用程序代码中集成对 dl_iterate_phdr() 函数的调用时，其运行时打印的信息可帮助您确定加载的共享库完整列表，
+以及每个库相关的附加数据（例如已加载库的起始地址）。
+
+为演示这一概念，我们创建了包含驱动程序和两个简单动态库的示例代码。以下示例展示了应用程序的源文件内容。
+其中一个动态库采用静态链接方式动态集成，而另一个库则通过调用 dlopen() 函数实现动态加载：
+
+```c
+#define _GNU_SOURCE
+#include <link.h>
+#include <stdio.h>
+#include <dlfcn.h>
+#include "sharedLib1Functions.h"
+#include "sharedLib2Functions.h"
+
+static const char* segment_type_to_string(uint32_t type)
+{
+	switch(type)
+	{
+	case PT_NULL:         // 0
+		return "Unused";
+		break;
+	case PT_LOAD:         // 1
+		return "Loadable Program Segment";
+		break;
+	case PT_DYNAMIC:      //2
+		return "Dynamic linking information";
+		break;
+	case PT_INTERP:       // 3
+		return "Program interpreter";
+		break;
+	case PT_NOTE:         // 4
+		return "Auxiliary information";
+		break;
+	case PT_SHLIB:        // 5
+		return "Reserved";
+		break;
+	case PT_PHDR:         // 6
+		return "Entry for header table itself";
+		break;
+	case PT_TLS:          // 7
+		return "Thread-local storage segment";
+		break;
+//	case PT_NUM:          // 8		/* Number of defined types */
+	case PT_LOOS:         // 0x60000000	
+		return "Start of OS-specific";
+		break;
+	case PT_GNU_EH_FRAME: // 0x6474e550	
+		return "GCC .eh_frame_hdr segment";
+		break;
+	case PT_GNU_STACK:    // 0x6474e551	
+		return "Indicates stack executability";
+		break;
+	case PT_GNU_RELRO:    // 0x6474e552	
+		return "Read-only after relocation";
+		break;
+//	case PT_LOSUNW:       // 0x6ffffffa
+	case PT_SUNWBSS:      // 0x6ffffffa	
+		return "Sun Specific segment";
+		break;
+	case PT_SUNWSTACK:    // 0x6ffffffb	
+		return "Sun Stack segment";
+		break;
+//	case PT_HISUNW:       // 0x6fffffff
+//	case PT_HIOS:         // 0x6fffffff	/* End of OS-specific */
+//	case PT_LOPROC:       // 0x70000000	/* Start of processor-specific */
+//	case PT_HIPROC:       // 0x7fffffff	/* End of processor-specific */	
+	default:
+		return "???";
+	}
+}
+
+static const char* flags_to_string(uint32_t flags)
+{
+	switch(flags)
+	{
+	case 1:
+		return "--x";
+		break;
+	case 2:
+		return "-w-";
+		break;
+	case 3:
+		return "-wx";
+		break;
+	case 4:
+		return "r--";
+		break;
+	case 5:
+		return "r-x";
+		break;
+	case 6:
+		return "rw-";
+		break;
+	case 7:
+		return "rwx";
+		break;
+	default:
+		return "???";
+		break;
+	}
+}
+
+static int header_handler(struct dl_phdr_info* info, size_t size, void* data)
+{
+	int j;
+    printf("name=%s (%d segments) address=%p\n",
+            info->dlpi_name, info->dlpi_phnum, (void*)info->dlpi_addr);
+    for (j = 0; j < info->dlpi_phnum; j++) {
+         printf("\t\t header %2d: address=%10p\n", j,
+             (void*) (info->dlpi_addr + info->dlpi_phdr[j].p_vaddr));
+         printf("\t\t\t type=0x%X (%s),\n\t\t\t flags=0x%X (%s)\n",
+                 info->dlpi_phdr[j].p_type, 
+                 segment_type_to_string(info->dlpi_phdr[j].p_type),
+                 info->dlpi_phdr[j].p_flags,
+                 flags_to_string(info->dlpi_phdr[j].p_flags));
+    }
+    printf("\n");
+    return 0;
+}
+
+int main(int argc, char* argv[])
+{
+	// function from statically aware loaded library
+	sharedLib1Function(argc);
+	
+	// function from run-time dynamically loaded library
+    void* pLibHandle = dlopen("libdemo2.so", RTLD_GLOBAL | RTLD_NOW);
+    if(NULL == pLibHandle)
+    {
+		printf("Failed loading libdemo2.so, error = %s\n", dlerror());
+		return -1;
+	}	
+	PFUNC pFunc = (PFUNC)dlsym(pLibHandle, "sharedLib2Function");
+	
+	if(NULL == pFunc)
+	{
+		printf("Failed identifying the symbol \"sharedLib2Function\"\n");
+		dlclose(pLibHandle);
+		pLibHandle = NULL;
+		return -1;
+	}
+	
+	pFunc(argc);
+	if(2 == argc)
+		getchar();
+		
+	if(3 == argc)
+		dl_iterate_phdr(header_handler, NULL);
+		
+	return 0;
+}
+```
+
+此代码示例的核心在于对 dl_iterate_phdr() 函数的调用。
+该函数会在运行时提取相关的进程映射信息，并将其传递给调用者。
+调用方需要负责提供回调函数（本例中为 header_handler()）的自定义实现。
+
+下面展示了程序运行后可能产生的屏幕输出示例。
+
+```bash
+$ ./driverApp 1 2 | grep -A 20 libdemo
+name=../sharedLib1/libdemo1.so (11 segments) address=0x750332487000
+                 header  0: address=0x750332487000
+                         type=0x1 (Loadable Program Segment),
+                         flags=0x4 (r--)
+                 header  1: address=0x750332488000
+                         type=0x1 (Loadable Program Segment),
+                         flags=0x5 (r-x)
+                 header  2: address=0x750332489000
+                         type=0x1 (Loadable Program Segment),
+                         flags=0x4 (r--)
+                 header  3: address=0x75033248adf8
+                         type=0x1 (Loadable Program Segment),
+                         flags=0x6 (rw-)
+                 header  4: address=0x75033248ae08
+                         type=0x2 (Dynamic linking information),
+                         flags=0x6 (rw-)
+                 header  5: address=0x7503324872a8
+                         type=0x4 (Auxiliary information),
+                         flags=0x4 (r--)
+                 header  6: address=0x7503324872c8
+                         type=0x4 (Auxiliary information),
+--
+name=../sharedLib2/libdemo2.so (11 segments) address=0x750332482000
+                 header  0: address=0x750332482000
+                         type=0x1 (Loadable Program Segment),
+                         flags=0x4 (r--)
+                 header  1: address=0x750332483000
+                         type=0x1 (Loadable Program Segment),
+                         flags=0x5 (r-x)
+                 header  2: address=0x750332484000
+                         type=0x1 (Loadable Program Segment),
+                         flags=0x4 (r--)
+                 header  3: address=0x750332485df8
+                         type=0x1 (Loadable Program Segment),
+                         flags=0x6 (rw-)
+                 header  4: address=0x750332485e08
+                         type=0x2 (Dynamic linking information),
+                         flags=0x6 (rw-)
+                 header  5: address=0x7503324822a8
+                         type=0x4 (Auxiliary information),
+                         flags=0x4 (r--)
+                 header  6: address=0x7503324822c8
+                         type=0x4 (Auxiliary information),
+```
+
+
+#### 参考资料:
+《高级C/C++编译技术》: 13.11 查看运行时动态链接的文件
 
