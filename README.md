@@ -43,15 +43,15 @@
 - [静态库中的单例](duplicate_symbols/singleton_in_static_library)
 
 
-### [Linux工具集](linux_toolbox)
+### [二进制分析工具集](binary_analysis_toolbox)
 
-- [file命令](linux_toolbox/file_command)
-- [size命令](linux_toolbox/size_command)
-- [ldd命令](linux_toolbox/ldd_command)
-- [nm命令](linux_toolbox/nm_command)
-- [objdump命令](linux_toolbox/objdump_command)
-- [readelf命令](linux_toolbox/readelf_command)
-- [strace命令](linux_toolbox/strace_command)
+- [file命令](binary_analysis_toolbox/file_command)
+- [size命令](binary_analysis_toolbox/size_command)
+- [ldd命令](binary_analysis_toolbox/ldd_command)
+- [nm命令](binary_analysis_toolbox/nm_command)
+- [objdump命令](binary_analysis_toolbox/objdump_command)
+- [readelf命令](binary_analysis_toolbox/readelf_command)
+- [strace命令](binary_analysis_toolbox/strace_command)
 
 
 ### [二进制分析](binary_analysis)
