@@ -71,3 +71,7 @@
 - [查看运行时动态链接的库文件](binary_analysis/listing_dynamically_linked_libraries)
 
 
+### [基于soname的版本控制方案](soname_based_versioning_scheme)
+
+- [库文件名携带版本信息](soname_based_versioning_scheme/library_filename_carries_the_version_information)
+
