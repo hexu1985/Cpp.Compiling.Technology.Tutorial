@@ -6,4 +6,5 @@
 - [通过runpath添加加载动态库文件搜索路径](load_so_by_runpath)
 - [ldconfig 缓存](ldconfig_cache)
 - [默认库路径（/lib 与 /usr/lib）](the_default_library_paths)
+- [优先级规则总结](priority_scheme_summary)
 
