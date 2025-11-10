@@ -18,3 +18,7 @@ export LD_PRELOAD=/home/milan/project/libs/libmilan.so:$LD_PRELOAD
 
 在诊断场景中，您可以快速创建标准函数的定制版本，加入调试输出信息，并将其编译成共享库。
 通过预加载该库，就能有效替换原本提供该函数的标准动态库。
+
+
+#### 参考资料:
+《高级C/C++编译技术》: 7.3.1 Linux运行时动态库文件的定位规则
