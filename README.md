@@ -31,6 +31,11 @@
 - [导入完整归档的情况](dynamic_library/build_so_whole_archive)
 
 
+### [Linux运行时动态库文件的定位规则](runtime_dynamic_library_location_rules)
+
+- [预加载库](runtime_dynamic_library_location_rules/preloaded_libraries)
+
+
 ### [重复符号处理](duplicate_symbols)
 
 - [C和C++中重复符号的对比](duplicate_symbols/duplicate_symbols_c_vs_cxx)
@@ -41,6 +46,13 @@
 - [动态库ABI符号和另一个动态库局部符号冲突](duplicate_symbols/dynamic_library_abi_symbol_collides_with_another_dynamic_library_local_symbol)
 - [两个未导出的动态库符号冲突](duplicate_symbols/duplicate_symbols_of_non_exported_symbol_dynamic_libraries)
 - [静态库中的单例](duplicate_symbols/singleton_in_static_library)
+
+
+### [基于soname的版本控制方案](soname_based_versioning_scheme)
+
+- [库文件名携带版本信息](soname_based_versioning_scheme/library_filename_carries_the_version_information)
+- [常规动态库升级实践](soname_based_versioning_scheme/the_usual_dynamic_library_upgrade_practices)
+- [SONAME实现的技术细节](soname_based_versioning_scheme/technicalities_of_the_soname_implementation)
 
 
 ### [二进制分析工具集](binary_analysis_toolbox)
@@ -70,11 +82,5 @@
 - [列出加载时依赖项](binary_analysis/listing_load_time_dependencies)
 - [查看运行时动态链接的库文件](binary_analysis/listing_dynamically_linked_libraries)
 
-
-### [基于soname的版本控制方案](soname_based_versioning_scheme)
-
-- [库文件名携带版本信息](soname_based_versioning_scheme/library_filename_carries_the_version_information)
-- [常规动态库升级实践](soname_based_versioning_scheme/the_usual_dynamic_library_upgrade_practices)
-- [SONAME实现的技术细节](soname_based_versioning_scheme/technicalities_of_the_soname_implementation)
 
 
