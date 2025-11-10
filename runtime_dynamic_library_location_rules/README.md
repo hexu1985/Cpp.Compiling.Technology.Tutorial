@@ -4,4 +4,6 @@
 - [通过rpath添加加载动态库文件搜索路径](load_so_by_rpath)
 - [LD_LIBRARY_PATH 环境变量](environment_variable)
 - [通过runpath添加加载动态库文件搜索路径](load_so_by_runpath)
+- [ldconfig 缓存](ldconfig_cache)
+- [默认库路径（/lib 与 /usr/lib）](the_default_library_paths)
 
