@@ -24,8 +24,6 @@
 - [创建动态库](dynamic_library/build_so)
 - [控制动态库符号的可见性](dynamic_library/export_symbol_visibility_control)
 - [动态库完成链接需要满足的条件](dynamic_library/build_so_no_undefined)
-- [通过rpath添加加载动态库文件搜索路径](dynamic_library/load_so_by_rpath)
-- [通过runpath添加加载动态库文件搜索路径](dynamic_library/load_so_by_runpath)
 - [运行时动态链接](dynamic_library/load_so_by_dlopen)
 - [静态编译](dynamic_library/static_build)
 - [导入完整归档的情况](dynamic_library/build_so_whole_archive)
@@ -34,6 +32,8 @@
 ### [Linux运行时动态库文件的定位规则](runtime_dynamic_library_location_rules)
 
 - [预加载库](runtime_dynamic_library_location_rules/preloaded_libraries)
+- [通过rpath添加加载动态库文件搜索路径](runtime_dynamic_library_location_rules/load_so_by_rpath)
+- [通过runpath添加加载动态库文件搜索路径](runtime_dynamic_library_location_rules/load_so_by_runpath)
 
 
 ### [重复符号处理](duplicate_symbols)
