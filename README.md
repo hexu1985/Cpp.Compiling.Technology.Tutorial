@@ -23,6 +23,7 @@
 
 - [创建动态库](dynamic_library/build_so)
 - [控制动态库符号的可见性](dynamic_library/export_symbol_visibility_control)
+- [符号导出控制演示实例](dynamic_library/the_symbol_export_control_demo_example)
 - [动态库完成链接需要满足的条件](dynamic_library/build_so_no_undefined)
 - [运行时动态链接](dynamic_library/load_so_by_dlopen)
 - [静态编译](dynamic_library/static_build)
