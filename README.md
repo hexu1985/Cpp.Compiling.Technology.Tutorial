@@ -60,6 +60,11 @@
 - [SONAME实现的技术细节](soname_based_versioning_scheme/technicalities_of_the_soname_implementation)
 
 
+### [基于符号的版本控制方案](symbol_versioning_scheme)
+
+- [基本实现要素](symbol_versioning_scheme/basic_implementation_ingredients)
+
+
 ### [二进制分析工具集](binary_analysis_toolbox)
 
 - [file命令](binary_analysis_toolbox/file_command)
