@@ -117,7 +117,7 @@ return nElements*sizeof(struct List);
 其对此中介函数符号的调用将在内部路由至正确的目标--即实际的动态库函数 `list_occupancy_1_0()`。
 
 而全新的客户端二进制文件（无需关注先前版本历史）将选择默认符号--通过名称中额外的 `@` 字符标识
-（本例中为 `list_occupancy@MYLIBVERSION_2.0`）。
+（本例中为 `list_occupancy@@MYLIBVERSION_2.0`）。
 
 
 #### 参考资料:
