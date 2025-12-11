@@ -63,6 +63,7 @@
 ### [基于符号的版本控制方案](symbol_versioning_scheme)
 
 - [基本实现要素](symbol_versioning_scheme/basic_implementation_ingredients)
+- [示例项目分析：第1阶段（初始版本）](symbol_versioning_scheme/phase_1_initial_version)
 
 
 ### [二进制分析工具集](binary_analysis_toolbox)

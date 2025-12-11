@@ -10,116 +10,77 @@
 这种方法能完整呈现已加载的共享库列表。当出现共享库相关调用时，通常在 mmap() 调用之后的几行输出中会显示其加载地址。
 
 ```bash
-$ strace ./driverApp
-execve("./driverApp", ["./driverApp"], 0x7fffbdbd8ed0 /* 52 vars */) = 0
-brk(NULL)                               = 0x5644b8cd7000
-arch_prctl(0x3001 /* ARCH_??? */, 0x7ffce38bd700) = -1 EINVAL (无效的参数)
-mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7b874948f000
-access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib1/glibc-hwcaps/x86-64-v3/libdemo1.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib1/glibc-hwcaps/x86-64-v2/libdemo1.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib1/tls/haswell/x86_64/libdemo1.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib1/tls/haswell/libdemo1.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib1/tls/x86_64/libdemo1.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib1/tls/libdemo1.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib1/haswell/x86_64/libdemo1.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib1/haswell/libdemo1.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib1/x86_64/libdemo1.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib1/libdemo1.so", O_RDONLY|O_CLOEXEC) = 3
-read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
-newfstatat(3, "", {st_mode=S_IFREG|0775, st_size=16896, ...}, AT_EMPTY_PATH) = 0
-getcwd("/home/hexu/git/Cpp.Compiling.Technology.Tutorial/linux_toolbox/objdump_command/c/driverApp", 128) = 91
-mmap(NULL, 16432, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7b874948a000
-mmap(0x7b874948b000, 4096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1000) = 0x7b874948b000
-mmap(0x7b874948c000, 4096, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2000) = 0x7b874948c000
-mmap(0x7b874948d000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2000) = 0x7b874948d000
-close(3)                                = 0
-openat(AT_FDCWD, "../sharedLib1/glibc-hwcaps/x86-64-v3/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib1/glibc-hwcaps/x86-64-v2/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib1/tls/haswell/x86_64/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib1/tls/haswell/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib1/tls/x86_64/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib1/tls/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib1/haswell/x86_64/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib1/haswell/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib1/x86_64/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib1/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib2/glibc-hwcaps/x86-64-v3/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib2/glibc-hwcaps/x86-64-v2/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib2/tls/haswell/x86_64/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib2/tls/haswell/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib2/tls/x86_64/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib2/tls/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib2/haswell/x86_64/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib2/haswell/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib2/x86_64/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib2/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
+$ strace ./test
+execve("./test", ["./test"], 0x7ffd45f647f0 /* 31 vars */) = 0
+brk(NULL)                               = 0x564086dfb000
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x79a03e850000
+access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
-newfstatat(3, "", {st_mode=S_IFREG|0644, st_size=119472, ...}, AT_EMPTY_PATH) = 0
-mmap(NULL, 119472, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7b874946c000
+fstat(3, {st_mode=S_IFREG|0644, st_size=84867, ...}) = 0
+mmap(NULL, 84867, PROT_READ, MAP_PRIVATE, 3, 0) = 0x79a03e83b000
+close(3)                                = 0
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libstdc++.so.6", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0644, st_size=2592224, ...}) = 0
+mmap(NULL, 2609472, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x79a03e400000
+mmap(0x79a03e49d000, 1343488, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x9d000) = 0x79a03e49d000
+mmap(0x79a03e5e5000, 552960, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e5000) = 0x79a03e5e5000
+mmap(0x79a03e66c000, 57344, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x26b000) = 0x79a03e66c000
+mmap(0x79a03e67a000, 12608, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x79a03e67a000
 close(3)                                = 0
 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
-read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0P\237\2\0\0\0\0\0"..., 832) = 832
+read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\220\243\2\0\0\0\0\0"..., 832) = 832
 pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784
-pread64(3, "\4\0\0\0 \0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0"..., 48, 848) = 48
-pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\325\31p\226\367\t\200\30)\261\30\257\33|\366c"..., 68, 896) = 68
-newfstatat(3, "", {st_mode=S_IFREG|0755, st_size=2220400, ...}, AT_EMPTY_PATH) = 0
+fstat(3, {st_mode=S_IFREG|0755, st_size=2125328, ...}) = 0
 pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784
-mmap(NULL, 2264656, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7b8749200000
-mprotect(0x7b8749228000, 2023424, PROT_NONE) = 0
-mmap(0x7b8749228000, 1658880, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x28000) = 0x7b8749228000
-mmap(0x7b87493bd000, 360448, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1bd000) = 0x7b87493bd000
-mmap(0x7b8749416000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x215000) = 0x7b8749416000
-mmap(0x7b874941c000, 52816, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7b874941c000
+mmap(NULL, 2170256, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x79a03e000000
+mmap(0x79a03e028000, 1605632, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x28000) = 0x79a03e028000
+mmap(0x79a03e1b0000, 323584, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1b0000) = 0x79a03e1b0000
+mmap(0x79a03e1ff000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1fe000) = 0x79a03e1ff000
+mmap(0x79a03e205000, 52624, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x79a03e205000
 close(3)                                = 0
-mmap(NULL, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7b8749469000
-arch_prctl(ARCH_SET_FS, 0x7b8749469740) = 0
-set_tid_address(0x7b8749469a10)         = 19026
-set_robust_list(0x7b8749469a20, 24)     = 0
-rseq(0x7b874946a0e0, 0x20, 0, 0x53053053) = 0
-mprotect(0x7b8749416000, 16384, PROT_READ) = 0
-mprotect(0x7b874948d000, 4096, PROT_READ) = 0
-mprotect(0x56448d512000, 4096, PROT_READ) = 0
-mprotect(0x7b87494c9000, 8192, PROT_READ) = 0
-prlimit64(0, RLIMIT_STACK, NULL, {rlim_cur=8192*1024, rlim_max=RLIM64_INFINITY}) = 0
-munmap(0x7b874946c000, 119472)          = 0
-newfstatat(1, "", {st_mode=S_IFCHR|0620, st_rdev=makedev(0x88, 0x1), ...}, AT_EMPTY_PATH) = 0
-getrandom("\x40\x11\xdc\xa9\xc9\x15\xf3\x66", 8, GRND_NONBLOCK) = 8
-brk(NULL)                               = 0x5644b8cd7000
-brk(0x5644b8cf8000)                     = 0x5644b8cf8000
-write(1, "sharedLib1Function(1) is called\n", 32sharedLib1Function(1) is called
-) = 32
-openat(AT_FDCWD, "../sharedLib1/glibc-hwcaps/x86-64-v3/libdemo2.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib1/glibc-hwcaps/x86-64-v2/libdemo2.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib1/tls/haswell/x86_64/libdemo2.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib1/tls/haswell/libdemo2.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib1/tls/x86_64/libdemo2.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib1/tls/libdemo2.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib1/haswell/x86_64/libdemo2.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib1/haswell/libdemo2.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib1/x86_64/libdemo2.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib1/libdemo2.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib2/glibc-hwcaps/x86-64-v3/libdemo2.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib2/glibc-hwcaps/x86-64-v2/libdemo2.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib2/tls/haswell/x86_64/libdemo2.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib2/tls/haswell/libdemo2.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib2/tls/x86_64/libdemo2.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib2/tls/libdemo2.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib2/haswell/x86_64/libdemo2.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib2/haswell/libdemo2.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib2/x86_64/libdemo2.so", O_RDONLY|O_CLOEXEC) = -1 ENOENT (没有那个文件或目录)
-openat(AT_FDCWD, "../sharedLib2/libdemo2.so", O_RDONLY|O_CLOEXEC) = 3
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libm.so.6", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0644, st_size=952616, ...}) = 0
+mmap(NULL, 950296, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x79a03e752000
+mmap(0x79a03e762000, 520192, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x10000) = 0x79a03e762000
+mmap(0x79a03e7e1000, 360448, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x8f000) = 0x79a03e7e1000
+mmap(0x79a03e839000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0xe7000) = 0x79a03e839000
+close(3)                                = 0
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libgcc_s.so.1", O_RDONLY|O_CLOEXEC) = 3
 read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
-newfstatat(3, "", {st_mode=S_IFREG|0775, st_size=16896, ...}, AT_EMPTY_PATH) = 0
-getcwd("/home/hexu/git/Cpp.Compiling.Technology.Tutorial/linux_toolbox/objdump_command/c/driverApp", 128) = 91
-mmap(NULL, 16432, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7b8749485000
-mmap(0x7b8749486000, 4096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1000) = 0x7b8749486000
-mmap(0x7b8749487000, 4096, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2000) = 0x7b8749487000
-mmap(0x7b8749488000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2000) = 0x7b8749488000
+fstat(3, {st_mode=S_IFREG|0644, st_size=183024, ...}) = 0
+mmap(NULL, 185256, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x79a03e724000
+mmap(0x79a03e728000, 147456, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x4000) = 0x79a03e728000
+mmap(0x79a03e74c000, 16384, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x28000) = 0x79a03e74c000
+mmap(0x79a03e750000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2b000) = 0x79a03e750000
 close(3)                                = 0
-mprotect(0x7b8749488000, 4096, PROT_READ) = 0
-write(1, "sharedLib2Function(1) is called\n", 32sharedLib2Function(1) is called
-) = 32
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x79a03e722000
+arch_prctl(ARCH_SET_FS, 0x79a03e723500) = 0
+set_tid_address(0x79a03e7237d0)         = 340812
+set_robust_list(0x79a03e7237e0, 24)     = 0
+rseq(0x79a03e723e20, 0x20, 0, 0x53053053) = 0
+mprotect(0x79a03e1ff000, 16384, PROT_READ) = 0
+mprotect(0x79a03e750000, 4096, PROT_READ) = 0
+mprotect(0x79a03e839000, 4096, PROT_READ) = 0
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x79a03e720000
+mprotect(0x79a03e66c000, 45056, PROT_READ) = 0
+mprotect(0x56407ae1f000, 4096, PROT_READ) = 0
+mprotect(0x79a03e88e000, 8192, PROT_READ) = 0
+prlimit64(0, RLIMIT_STACK, NULL, {rlim_cur=8192*1024, rlim_max=RLIM64_INFINITY}) = 0
+munmap(0x79a03e83b000, 84867)           = 0
+futex(0x79a03e67a7bc, FUTEX_WAKE_PRIVATE, 2147483647) = 0
+getrandom("\x15\xf6\x5f\x2e\xdf\x14\xaa\x31", 8, GRND_NONBLOCK) = 8
+brk(NULL)                               = 0x564086dfb000
+brk(0x564086e1c000)                     = 0x564086e1c000
+clock_gettime(CLOCK_PROCESS_CPUTIME_ID, {tv_sec=0, tv_nsec=4914098}) = 0
+clock_gettime(CLOCK_PROCESS_CPUTIME_ID, {tv_sec=0, tv_nsec=902305808}) = 0
+fstat(1, {st_mode=S_IFCHR|0620, st_rdev=makedev(0x88, 0x3), ...}) = 0
+write(1, "Time: 0.90 sec\n", 15Time: 0.90 sec
+)        = 15
+fstat(0, {st_mode=S_IFCHR|0620, st_rdev=makedev(0x88, 0x3), ...}) = 0
+read(0,
+"\n", 1024)                     = 1
 exit_group(0)                           = ?
 +++ exited with 0 +++
 ```
@@ -130,110 +91,64 @@ exit_group(0)                           = ?
 针对动态库追踪这一特定场景，使用 LD_DEBUG=files 选项能够输出大量详细信息，完整展示运行时动态加载的库文件（包括库名称、运行时路径、入口点地址等核心数据）。
 
 ```bash
-$ LD_DEBUG=libs ./FactoryMethod
-     26612:	find library=libidcard.so [0]; searching
-     26612:	 search path=/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/idcard/glibc-hwcaps/x86-64-v3:/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/idcard/glibc-hwcaps/x86-64-v2:/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/idcard/tls/haswell/x86_64:/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/idcard/tls/haswell:/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/idcard/tls/x86_64:/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/idcard/tls:/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/idcard/haswell/x86_64:/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/idcard/haswell:/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/idcard/x86_64:/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/idcard:/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/framework/glibc-hwcaps/x86-64-v3:/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/framework/glibc-hwcaps/x86-64-v2:/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/framework/tls/haswell/x86_64:/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/framework/tls/haswell:/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/framework/tls/x86_64:/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/framework/tls:/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/framework/haswell/x86_64:/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/framework/haswell:/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/framework/x86_64:/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/framework		(RUNPATH from file ./FactoryMethod)
-     26612:	  trying file=/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/idcard/glibc-hwcaps/x86-64-v3/libidcard.so
-     26612:	  trying file=/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/idcard/glibc-hwcaps/x86-64-v2/libidcard.so
-     26612:	  trying file=/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/idcard/tls/haswell/x86_64/libidcard.so
-     26612:	  trying file=/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/idcard/tls/haswell/libidcard.so
-     26612:	  trying file=/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/idcard/tls/x86_64/libidcard.so
-     26612:	  trying file=/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/idcard/tls/libidcard.so
-     26612:	  trying file=/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/idcard/haswell/x86_64/libidcard.so
-     26612:	  trying file=/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/idcard/haswell/libidcard.so
-     26612:	  trying file=/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/idcard/x86_64/libidcard.so
-     26612:	  trying file=/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/idcard/libidcard.so
-     26612:
-     26612:	find library=libframework.so [0]; searching
-     26612:	 search path=/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/idcard:/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/framework/glibc-hwcaps/x86-64-v3:/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/framework/glibc-hwcaps/x86-64-v2:/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/framework/tls/haswell/x86_64:/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/framework/tls/haswell:/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/framework/tls/x86_64:/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/framework/tls:/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/framework/haswell/x86_64:/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/framework/haswell:/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/framework/x86_64:/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/framework		(RUNPATH from file ./FactoryMethod)
-     26612:	  trying file=/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/idcard/libframework.so
-     26612:	  trying file=/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/framework/glibc-hwcaps/x86-64-v3/libframework.so
-     26612:	  trying file=/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/framework/glibc-hwcaps/x86-64-v2/libframework.so
-     26612:	  trying file=/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/framework/tls/haswell/x86_64/libframework.so
-     26612:	  trying file=/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/framework/tls/haswell/libframework.so
-     26612:	  trying file=/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/framework/tls/x86_64/libframework.so
-     26612:	  trying file=/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/framework/tls/libframework.so
-     26612:	  trying file=/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/framework/haswell/x86_64/libframework.so
-     26612:	  trying file=/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/framework/haswell/libframework.so
-     26612:	  trying file=/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/framework/x86_64/libframework.so
-     26612:	  trying file=/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/framework/libframework.so
-     26612:
-     26612:	find library=libstdc++.so.6 [0]; searching
-     26612:	 search path=/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/idcard:/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/framework		(RUNPATH from file ./FactoryMethod)
-     26612:	  trying file=/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/idcard/libstdc++.so.6
-     26612:	  trying file=/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/framework/libstdc++.so.6
-     26612:	 search cache=/etc/ld.so.cache
-     26612:	  trying file=/lib/x86_64-linux-gnu/libstdc++.so.6
-     26612:
-     26612:	find library=libgcc_s.so.1 [0]; searching
-     26612:	 search path=/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/idcard:/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/framework		(RUNPATH from file ./FactoryMethod)
-     26612:	  trying file=/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/idcard/libgcc_s.so.1
-     26612:	  trying file=/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/framework/libgcc_s.so.1
-     26612:	 search cache=/etc/ld.so.cache
-     26612:	  trying file=/lib/x86_64-linux-gnu/libgcc_s.so.1
-     26612:
-     26612:	find library=libc.so.6 [0]; searching
-     26612:	 search path=/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/idcard:/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/framework		(RUNPATH from file ./FactoryMethod)
-     26612:	  trying file=/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/idcard/libc.so.6
-     26612:	  trying file=/home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/framework/libc.so.6
-     26612:	 search cache=/etc/ld.so.cache
-     26612:	  trying file=/lib/x86_64-linux-gnu/libc.so.6
-     26612:
-     26612:	find library=libm.so.6 [0]; searching
-     26612:	 search cache=/etc/ld.so.cache
-     26612:	  trying file=/lib/x86_64-linux-gnu/libm.so.6
-     26612:
-     26612:
-     26612:	calling init: /lib64/ld-linux-x86-64.so.2
-     26612:
-     26612:
-     26612:	calling init: /lib/x86_64-linux-gnu/libc.so.6
-     26612:
-     26612:
-     26612:	calling init: /lib/x86_64-linux-gnu/libm.so.6
-     26612:
-     26612:
-     26612:	calling init: /lib/x86_64-linux-gnu/libgcc_s.so.1
-     26612:
-     26612:
-     26612:	calling init: /lib/x86_64-linux-gnu/libstdc++.so.6
-     26612:
-     26612:
-     26612:	calling init: /home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/framework/libframework.so
-     26612:
-     26612:
-     26612:	calling init: /home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/idcard/libidcard.so
-     26612:
-     26612:
-     26612:	initialize program: ./FactoryMethod
-     26612:
-     26612:
-     26612:	transferring control: ./FactoryMethod
-     26612:
-制作小明的ID卡。
-制作小红的ID卡。
-制作小刚的ID卡。
-使用小明的ID卡。
-使用小红的ID卡。
-使用小刚的ID卡。
-     26612:
-     26612:	calling fini: ./FactoryMethod [0]
-     26612:
-     26612:
-     26612:	calling fini: /home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/idcard/libidcard.so [0]
-     26612:
-     26612:
-     26612:	calling fini: /home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/debugging_the_linking/cxx/build/framework/libframework.so [0]
-     26612:
-     26612:
-     26612:	calling fini: /lib/x86_64-linux-gnu/libstdc++.so.6 [0]
-     26612:
-     26612:
-     26612:	calling fini: /lib/x86_64-linux-gnu/libgcc_s.so.1 [0]
-     26612:
-     26612:
-     26612:	calling fini: /lib/x86_64-linux-gnu/libm.so.6 [0]
-     26612:
+$ LD_DEBUG=libs ./test 
+    340958:     find library=libstdc++.so.6 [0]; searching
+    340958:      search cache=/etc/ld.so.cache
+    340958:       trying file=/lib/x86_64-linux-gnu/libstdc++.so.6
+    340958:
+    340958:     find library=libc.so.6 [0]; searching
+    340958:      search cache=/etc/ld.so.cache
+    340958:       trying file=/lib/x86_64-linux-gnu/libc.so.6
+    340958:
+    340958:     find library=libm.so.6 [0]; searching
+    340958:      search cache=/etc/ld.so.cache
+    340958:       trying file=/lib/x86_64-linux-gnu/libm.so.6
+    340958:
+    340958:     find library=libgcc_s.so.1 [0]; searching
+    340958:      search cache=/etc/ld.so.cache
+    340958:       trying file=/lib/x86_64-linux-gnu/libgcc_s.so.1
+    340958:
+    340958:
+    340958:     calling init: /lib64/ld-linux-x86-64.so.2
+    340958:
+    340958:
+    340958:     calling init: /lib/x86_64-linux-gnu/libc.so.6
+    340958:
+    340958:
+    340958:     calling init: /lib/x86_64-linux-gnu/libgcc_s.so.1
+    340958:
+    340958:
+    340958:     calling init: /lib/x86_64-linux-gnu/libm.so.6
+    340958:
+    340958:
+    340958:     calling init: /lib/x86_64-linux-gnu/libstdc++.so.6
+    340958:
+    340958:
+    340958:     initialize program: ./test
+    340958:
+    340958:
+    340958:     transferring control: ./test
+    340958:
+
+Time: 0.97 sec
+    340958:
+    340958:     calling fini:  [0]
+    340958:
+    340958:
+    340958:     calling fini: /lib/x86_64-linux-gnu/libstdc++.so.6 [0]
+    340958:
+    340958:
+    340958:     calling fini: /lib/x86_64-linux-gnu/libm.so.6 [0]
+    340958:
+    340958:
+    340958:     calling fini: /lib/x86_64-linux-gnu/libgcc_s.so.1 [0]
+    340958:
+    340958:
+    340958:     calling fini: /lib/x86_64-linux-gnu/libc.so.6 [0]
+    340958:
+    340958:
+    340958:     calling fini: /lib64/ld-linux-x86-64.so.2 [0]
+    340958:
 ```
 
 **/proc/<ID>/maps 文件**
@@ -241,60 +156,60 @@ $ LD_DEBUG=libs ./FactoryMethod
 当进程运行时，Linux操作系统会在 `/proc` 目录下维护一组文件，用于记录与进程相关的重要信息。
 特别地，对于进程ID为 NNNN 的进程，其 `/proc/<NNNN>/maps` 文件包含了已加载库及其各自加载地址的完整列表。
 
-例如，下面展示了该方法为Firefox浏览器生成的报告内容。
+例如，下面展示了该方法为test生成的报告内容。
 
+在一个终端上执行：
 ```bash
-$ ps -ef | grep firefox
-hexu        5953    2503 50 16:34 ?        00:00:02 /snap/firefox/7177/usr/lib/firefox/firefox
-$ cat /proc/5953/maps
-823d00000-823e00000 rw-p 00000000 00:00 0                                [anon:js-gc-heap]
-120ad500000-120ad600000 rw-p 00000000 00:00 0                            [anon:js-gc-heap]
-409bf700000-409bf800000 rw-p 00000000 00:00 0                            [anon:js-gc-heap]
-5b9e5500000-5b9e5600000 rw-p 00000000 00:00 0                            [anon:js-gc-heap]
-74d5f900000-74d5fa00000 rw-p 00000000 00:00 0                            [anon:js-gc-heap]
-82222500000-82222600000 rw-p 00000000 00:00 0                            [anon:js-gc-heap]
-96ee7a00000-96ee7b00000 rw-p 00000000 00:00 0                            [anon:js-gc-heap]
-b38bee00000-b38bef00000 rw-p 00000000 00:00 0                            [anon:js-gc-heap]
-f0410600000-f0410700000 rw-p 00000000 00:00 0                            [anon:js-gc-heap]
-fae18900000-fae18a00000 rw-p 00000000 00:00 0                            [anon:js-gc-heap]
-110082900000-110082a00000 rw-p 00000000 00:00 0                          [anon:js-gc-heap]
-11bb93a00000-11bb93b00000 rw-p 00000000 00:00 0                          [anon:js-gc-heap]
-13913a300000-13913a400000 rw-p 00000000 00:00 0                          [anon:js-gc-heap]
-15bec3b00000-15bec3c00000 rw-p 00000000 00:00 0                          [anon:js-gc-heap]
-197dd4d00000-197dd4e00000 rw-p 00000000 00:00 0                          [anon:js-gc-heap]
-1b5781b00000-1b5781c00000 rw-p 00000000 00:00 0                          [anon:js-gc-heap]
-223dd7100000-223dd7200000 rw-p 00000000 00:00 0                          [anon:js-gc-heap]
-271094f00000-271095000000 rw-p 00000000 00:00 0                          [anon:js-gc-heap]
-2817fdd00000-2817fde00000 rw-p 00000000 00:00 0                          [anon:js-gc-heap]
-2abecea00000-2abeceb00000 rw-p 00000000 00:00 0                          [anon:js-gc-heap]
-2bf305f00000-2bf306000000 rw-p 00000000 00:00 0                          [anon:js-gc-heap]
-2d665d300000-2d665d400000 rw-p 00000000 00:00 0                          [anon:js-gc-heap]
-2e7fc24c7000-2e7fc24d5000 r-xp 00000000 00:00 0                          [anon:js-executable-memory]
-...
-712d68284000-712d6831e000 r--p 00000000 07:09 11130                      /snap/firefox/7177/gnome-platform/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30
-712d6831e000-712d6842f000 r-xp 0009a000 07:09 11130                      /snap/firefox/7177/gnome-platform/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30
-712d6842f000-712d6849e000 r--p 001ab000 07:09 11130                      /snap/firefox/7177/gnome-platform/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30
-712d6849e000-712d6849f000 ---p 0021a000 07:09 11130                      /snap/firefox/7177/gnome-platform/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30
-712d6849f000-712d684aa000 r--p 0021a000 07:09 11130                      /snap/firefox/7177/gnome-platform/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30
-712d684aa000-712d684ad000 rw-p 00225000 07:09 11130                      /snap/firefox/7177/gnome-platform/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30
-712d684ad000-712d684b0000 rw-p 00000000 00:00 0
-712d684b0000-712d684b1000 r--p 00000000 07:09 300                        /snap/firefox/7177/gnome-platform/lib/x86_64-linux-gnu/bindtextdomain.so
-712d684b1000-712d684b2000 r-xp 00001000 07:09 300                        /snap/firefox/7177/gnome-platform/lib/x86_64-linux-gnu/bindtextdomain.so
-712d684b2000-712d684b3000 r--p 00002000 07:09 300                        /snap/firefox/7177/gnome-platform/lib/x86_64-linux-gnu/bindtextdomain.so
-712d684b3000-712d684b4000 r--p 00002000 07:09 300                        /snap/firefox/7177/gnome-platform/lib/x86_64-linux-gnu/bindtextdomain.so
-712d684b4000-712d684b5000 rw-p 00003000 07:09 300                        /snap/firefox/7177/gnome-platform/lib/x86_64-linux-gnu/bindtextdomain.so
-712d684b5000-712d684b7000 rw-p 00000000 00:00 0
-712d684b7000-712d684b9000 r--p 00000000 00:00 0                          [vvar]
-712d684b9000-712d684bb000 r--p 00000000 00:00 0                          [vvar_vclock]
-712d684bb000-712d684bd000 r-xp 00000000 00:00 0                          [vdso]
-712d684bd000-712d684bf000 r--p 00000000 07:02 7482                       /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
-712d684bf000-712d684e9000 r-xp 00002000 07:02 7482                       /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
-712d684e9000-712d684f4000 r--p 0002c000 07:02 7482                       /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
-712d684f4000-712d684f5000 r--p 00000000 07:02 2090                       /usr/lib/locale/C.utf8/LC_IDENTIFICATION
-712d684f5000-712d684f7000 r--p 00037000 07:02 7482                       /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
-712d684f7000-712d684f9000 rw-p 00039000 07:02 7482                       /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
-7ffd3741b000-7ffd37441000 rw-p 00000000 00:00 0                          [stack]
-7ffd37441000-7ffd37443000 rw-p 00000000 00:00 0
+$ ./test 
+Time: 0.89 sec
+```
+
+在另外一个终端上执行：
+```bash
+$ ps -eaf | grep test
+kernoops    1448       1  0 Dec06 ?        00:00:00 /usr/sbin/kerneloops --test
+hexu      341102  339248  1 10:19 pts/3    00:00:00 ./test
+hexu      341131  340565  0 10:20 pts/5    00:00:00 grep --color=auto test
+$ cat /proc/341102/maps 
+57c6bafb5000-57c6bafb6000 r--p 00000000 08:02 2889995                    /home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/listing_dynamically_linked_libraries/cxx/test
+57c6bafb6000-57c6bafb7000 r-xp 00001000 08:02 2889995                    /home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/listing_dynamically_linked_libraries/cxx/test
+57c6bafb7000-57c6bafb8000 r--p 00002000 08:02 2889995                    /home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/listing_dynamically_linked_libraries/cxx/test
+57c6bafb8000-57c6bafb9000 r--p 00002000 08:02 2889995                    /home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/listing_dynamically_linked_libraries/cxx/test
+57c6bafb9000-57c6bafba000 rw-p 00003000 08:02 2889995                    /home/hexu/git/Cpp.Compiling.Technology.Tutorial/binary_analysis/listing_dynamically_linked_libraries/cxx/test
+57c6f184b000-57c6f186c000 rw-p 00000000 00:00 0                          [heap]
+718f33c00000-718f33c28000 r--p 00000000 08:02 3410336                    /usr/lib/x86_64-linux-gnu/libc.so.6
+718f33c28000-718f33db0000 r-xp 00028000 08:02 3410336                    /usr/lib/x86_64-linux-gnu/libc.so.6
+718f33db0000-718f33dff000 r--p 001b0000 08:02 3410336                    /usr/lib/x86_64-linux-gnu/libc.so.6
+718f33dff000-718f33e03000 r--p 001fe000 08:02 3410336                    /usr/lib/x86_64-linux-gnu/libc.so.6
+718f33e03000-718f33e05000 rw-p 00202000 08:02 3410336                    /usr/lib/x86_64-linux-gnu/libc.so.6
+718f33e05000-718f33e12000 rw-p 00000000 00:00 0 
+718f34000000-718f3409d000 r--p 00000000 08:02 3419893                    /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.33
+718f3409d000-718f341e5000 r-xp 0009d000 08:02 3419893                    /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.33
+718f341e5000-718f3426c000 r--p 001e5000 08:02 3419893                    /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.33
+718f3426c000-718f34277000 r--p 0026b000 08:02 3419893                    /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.33
+718f34277000-718f3427a000 rw-p 00276000 08:02 3419893                    /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.33
+718f3427a000-718f3427e000 rw-p 00000000 00:00 0 
+718f342ec000-718f342f0000 rw-p 00000000 00:00 0 
+718f342f0000-718f342f4000 r--p 00000000 08:02 3419500                    /usr/lib/x86_64-linux-gnu/libgcc_s.so.1
+718f342f4000-718f34318000 r-xp 00004000 08:02 3419500                    /usr/lib/x86_64-linux-gnu/libgcc_s.so.1
+718f34318000-718f3431c000 r--p 00028000 08:02 3419500                    /usr/lib/x86_64-linux-gnu/libgcc_s.so.1
+718f3431c000-718f3431d000 r--p 0002b000 08:02 3419500                    /usr/lib/x86_64-linux-gnu/libgcc_s.so.1
+718f3431d000-718f3431e000 rw-p 0002c000 08:02 3419500                    /usr/lib/x86_64-linux-gnu/libgcc_s.so.1
+718f3431e000-718f3432e000 r--p 00000000 08:02 3410339                    /usr/lib/x86_64-linux-gnu/libm.so.6
+718f3432e000-718f343ad000 r-xp 00010000 08:02 3410339                    /usr/lib/x86_64-linux-gnu/libm.so.6
+718f343ad000-718f34405000 r--p 0008f000 08:02 3410339                    /usr/lib/x86_64-linux-gnu/libm.so.6
+718f34405000-718f34406000 r--p 000e7000 08:02 3410339                    /usr/lib/x86_64-linux-gnu/libm.so.6
+718f34406000-718f34407000 rw-p 000e8000 08:02 3410339                    /usr/lib/x86_64-linux-gnu/libm.so.6
+718f3441c000-718f3441e000 rw-p 00000000 00:00 0 
+718f3441e000-718f34420000 r--p 00000000 00:00 0                          [vvar]
+718f34420000-718f34422000 r--p 00000000 00:00 0                          [vvar_vclock]
+718f34422000-718f34424000 r-xp 00000000 00:00 0                          [vdso]
+718f34424000-718f34425000 r--p 00000000 08:02 3410333                    /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+718f34425000-718f34450000 r-xp 00001000 08:02 3410333                    /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+718f34450000-718f3445a000 r--p 0002c000 08:02 3410333                    /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+718f3445a000-718f3445c000 r--p 00036000 08:02 3410333                    /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+718f3445c000-718f3445e000 rw-p 00038000 08:02 3410333                    /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+7ffc525ec000-7ffc5260d000 rw-p 00000000 00:00 0                          [stack]
 ffffffffff600000-ffffffffff601000 --xp 00000000 00:00 0                  [vsyscall]
 ```
 
@@ -307,7 +222,7 @@ ffffffffff600000-ffffffffff601000 --xp 00000000 00:00 0                  [vsysca
 如果确认当前系统中只有一个该程序的实例在运行，可以结合使用pgrep（进程查找）命令来避免手动查找进程ID的步骤。以Firefox浏览器为例，只需执行：
 
 ```bash
-$ cat /proc/`pgrep firefox`/maps
+$ cat /proc/`pgrep test`/maps
 ```
 
 **lsof 工具**
@@ -317,48 +232,36 @@ lsof 实用程序可分析运行中的进程，并在标准输出流中打印进
 
 在它报告的各种已打开文件类型中，还会包含由进程加载的动态库列表，无论这些库是通过静态链接还是动态加载（在运行时通过 dlopen 调用）方式载入的。
 
-以下代码片段演示了如何获取 Firefox 浏览器打开的所有共享库列表：
+以下代码片段演示了如何获取 test 浏览器打开的所有共享库列表：
 
+在一个终端上执行：
 ```bash
-$ lsof -p 5953 | grep '.so'
-firefox 5953 hexu  mem       REG                7,9             10834 /snap/firefox/7177/gnome-platform/usr/lib/x86_64-linux-gnu/libicudata.so.70.1 (stat: No such file or directory)
-firefox 5953 hexu  mem       REG                7,9             10849 /snap/firefox/7177/gnome-platform/usr/lib/x86_64-linux-gnu/libicuuc.so.70.1 (stat: No such file or directory)
-firefox 5953 hexu  mem       REG                7,9             11311 /snap/firefox/7177/gnome-platform/usr/lib/x86_64-linux-gnu/libxml2.so.2.9.13 (stat: No such file or directory)
-firefox 5953 hexu  mem       REG                7,9               870 /snap/firefox/7177/gnome-platform/usr/lib/librsvg-2.so.2.48.0 (stat: No such file or directory)
-firefox 5953 hexu  mem       REG                7,9              9678 /snap/firefox/7177/gnome-platform/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-svg.so (stat: No such file or directory)
-firefox 5953 hexu  mem       REG                7,9             11289 /snap/firefox/7177/gnome-platform/usr/lib/x86_64-linux-gnu/libxcb-randr.so.0.1.0 (stat: No such file or directory)
-firefox 5953 hexu  mem       REG                7,9             11257 /snap/firefox/7177/gnome-platform/usr/lib/x86_64-linux-gnu/libwayland-server.so.0.22.0 (stat: No such file or directory)
-firefox 5953 hexu  mem       REG                7,4    378952     326 /snap/firefox/7177/usr/lib/x86_64-linux-gnu/libopus.so.0.8.0
-firefox 5953 hexu  mem       REG                7,9             11233 /snap/firefox/7177/gnome-platform/usr/lib/x86_64-linux-gnu/libvorbisenc.so.2.0.12 (stat: No such file or directory)
-firefox 5953 hexu  mem       REG                7,9             11231 /snap/firefox/7177/gnome-platform/usr/lib/x86_64-linux-gnu/libvorbis.so.0.4.9 (stat: No such file or directory)
-firefox 5953 hexu  mem       REG                7,9             10297 /snap/firefox/7177/gnome-platform/usr/lib/x86_64-linux-gnu/libFLAC.so.8.3.0 (stat: No such file or directory)
-firefox 5953 hexu  mem       REG                7,9             11111 /snap/firefox/7177/gnome-platform/usr/lib/x86_64-linux-gnu/libsndfile.so.1.0.31 (stat: No such file or directory)firefox 5953 hexu  mem       REG                7,9             11818 /snap/firefox/7177/gnome-platform/usr/lib/x86_64-linux-gnu/pulseaudio/libpulsecommon-15.99.so (stat: No such file or directory)
-...
-firefox 5953 hexu  mem       REG                7,4    409200     289 /snap/firefox/7177/usr/lib/firefox/libssl3.so
-firefox 5953 hexu  mem       REG                7,4   1449136     280 /snap/firefox/7177/usr/lib/firefox/libmozsqlite3.so
-firefox 5953 hexu  mem       REG                7,4    169096     287 /snap/firefox/7177/usr/lib/firefox/libsmime3.so
-firefox 5953 hexu  mem       REG                7,4    739152     283 /snap/firefox/7177/usr/lib/firefox/libnss3.so
-firefox 5953 hexu  mem       REG                7,4    184712     284 /snap/firefox/7177/usr/lib/firefox/libnssutil3.so
-firefox 5953 hexu  mem       REG                7,4    179200     274 /snap/firefox/7177/usr/lib/firefox/liblgpllibs.so
-firefox 5953 hexu  mem       REG                7,4   8539912     273 /snap/firefox/7177/usr/lib/firefox/libgkcodecs.so
-firefox 5953 hexu  mem       REG                7,4    172704     279 /snap/firefox/7177/usr/lib/firefox/libmozsandbox.so
-firefox 5953 hexu  mem       REG                7,4    210000     282 /snap/firefox/7177/usr/lib/firefox/libnspr4.so
-firefox 5953 hexu  mem       REG                7,2              7511 /usr/lib/x86_64-linux-gnu/libc.so.6 (path dev=8,2, inode=3410336)
-firefox 5953 hexu  mem       REG                7,2              7561 /usr/lib/x86_64-linux-gnu/libgcc_s.so.1 (path dev=8,2, inode=3419500)
-firefox 5953 hexu  mem       REG                7,2              7612 /usr/lib/x86_64-linux-gnu/libm.so.6 (path dev=8,2, inode=3410339)
-firefox 5953 hexu  mem       REG                7,4      4112     277 /snap/firefox/7177/usr/lib/firefox/libmozgtk.so
-firefox 5953 hexu  mem       REG                7,4     12048     286 /snap/firefox/7177/usr/lib/firefox/libplds4.so
-firefox 5953 hexu  mem       REG                7,4     16232     285 /snap/firefox/7177/usr/lib/firefox/libplc4.so
-firefox 5953 hexu  mem       REG                7,9             11130 /snap/firefox/7177/gnome-platform/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30 (stat: No such file or directory)
-firefox 5953 hexu  mem       REG                7,9               300 /snap/firefox/7177/gnome-platform/lib/x86_64-linux-gnu/bindtextdomain.so (stat: No such file or directory)
-firefox 5953 hexu  mem       REG                7,2              7482 /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2 (path dev=8,2, inode=3410333)
+$ ./test 
+Time: 0.89 sec
+```
+
+在另外一个终端上执行：
+```bash
+$ ps -eaf | grep test
+kernoops    1448       1  0 Dec06 ?        00:00:00 /usr/sbin/kerneloops --test
+hexu      341102  339248  1 10:19 pts/3    00:00:00 ./test
+hexu      341131  340565  0 10:20 pts/5    00:00:00 grep --color=auto test
+$ lsof -p 341102 | grep '.so'
+$ lsof -p 341102 | grep '.so'
+lsof: WARNING: can't stat() tracefs file system /sys/kernel/debug/tracing
+      Output information may be incomplete.
+test    341102 hexu  mem    REG    8,2  2125328 3410336 /usr/lib/x86_64-linux-gnu/libc.so.6
+test    341102 hexu  mem    REG    8,2  2592224 3419893 /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.33
+test    341102 hexu  mem    REG    8,2   183024 3419500 /usr/lib/x86_64-linux-gnu/libgcc_s.so.1
+test    341102 hexu  mem    REG    8,2   952616 3410339 /usr/lib/x86_64-linux-gnu/libm.so.6
+test    341102 hexu  mem    REG    8,2   236616 3410333 /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
 ```
 
 备注：
 如果确认当前系统中只有一个该程序的实例在运行，可以结合使用pgrep（进程查找）命令来避免手动查找进程ID的步骤。以Firefox浏览器为例，只需执行：
 
 ```bash
-$ lsof -p `pgrep firefox`
+$ lsof -p `pgrep test`
 ```
 
 请注意，lsof 提供了定期检查进程的命令行选项。通过设定检测周期，您可能捕捉到运行时动态加载和卸载发生的瞬间。
