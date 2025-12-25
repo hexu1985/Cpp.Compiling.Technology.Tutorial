@@ -163,3 +163,223 @@ int main(int argc, char* argv[])
     return nRetValue;
 }
 ```
+
+新应用程序的名称将相应选定：
+
+```bash
+$ gcc -g -O0 -c -I../sharedLib2.0 main.c
+$ gcc main.o -Wl,-L../sharedLib2.0 -lsimple
+             -Wl,-R../sharedLib2.0 -o ver2PeerApp
+```
+
+运行时的对比将清晰地表明，旧客户端的功能不会受主要版本更新的影响。然而，新的应用程序则需依赖版本2.0带来的新功能。
+下面对此进行了总结说明。
+
+```bash
+$ ./firstDemoApp 
+ lib: first_function_1_0
+ lib: second_function
+first(1) + second(2) = 6
+$ ./newerApp 
+ lib: first_function_1_0
+ lib: second_function
+ lib: fourth_function
+first(1) + second(2) + fourth(4) = 14
+$ ./ver2PeerApp
+ lib: first_function_2_0
+ lib: second_function
+ lib: fourth_function
+first(1) + second(2) + fourth(4) = 2012
+```
+
+**ABI函数原型变更的案例**
+
+先前描述的情况略显奇特。由于现实中存在多种方法可以规避此类问题，因此其实际发生的概率相当低。
+然而，从教育视角来看，这一案例却极具价值——解决此类问题的流程可谓最为简单直接。
+
+在主要版本代码变更中，更常见的情况是函数签名的修改需求。
+例如，假设为了适应新的应用场景，first_function() 函数需要接收一个额外的输入参数：
+
+```c
+int first_function(int x, int normfactor);
+```
+
+显然，现在需要支持同名但不同签名的函数。为演示这一问题，我们创建另一个版本，代码如下：
+
+file: simpleVersionScript
+
+```
+LIBSIMPLE_1.0 {
+    global:
+         first_function; second_function;
+    local:
+         *;
+};
+
+LIBSIMPLE_1.1 {
+    global:
+         fourth_function;
+    local:
+         *;
+};
+
+LIBSIMPLE_2.0 {
+    global:
+         first_function;
+    local:
+         *;
+};
+
+LIBSIMPLE_3.0 {
+    global:
+         first_function;
+    local:
+         *;
+};
+```
+
+总的来说，这个问题的解决方案与前一个案例并无本质区别，因为基于.symver汇编指令的处理方式与前例基本相同
+
+file: simple.c
+
+```c
+#include <stdio.h>
+#include "simple.h"
+
+__asm__(".symver first_function_1_0,first_function@LIBSIMPLE_1.0");
+int first_function_1_0(int x)
+{
+    printf(" lib: %s\n", __FUNCTION__);
+    return (x+1);
+}
+
+__asm__(".symver first_function_2_0,first_function@LIBSIMPLE_2.0");
+int first_function_2_0(int x)
+{
+    printf(" lib: %s\n", __FUNCTION__);
+    return 1000*(x+1);
+}
+
+__asm__(".symver first_function_3_0,first_function@@LIBSIMPLE_3.0");
+int first_function_3_0(int x, int normfactor)
+{
+    printf(" lib: %s\n", __FUNCTION__);
+    return normfactor*(x+1);
+}
+
+int second_function(int x)
+{
+    printf(" lib: %s\n", __FUNCTION__);
+    return (x+2);
+}
+
+int third_function(int x)
+{
+    printf(" lib: %s\n", __FUNCTION__);
+    return (x+3);
+}
+
+int fourth_function(int x)
+{
+    printf(" lib: %s\n", __FUNCTION__);
+    return (x+4);
+}
+
+int fifth_function(int x)
+{
+    printf(" lib: %s\n", __FUNCTION__);
+    return (x+5);
+}
+```
+
+file: simple.h
+
+```c
+#pragma once
+
+// defined when building the latest client binary
+#ifdef SIMPLELIB_VERSION_3_0
+int first_function(int x, int normfactor);
+#else
+int first_function(int x);
+#endif // SIMPLELIB_VERSION_3_0
+
+int second_function(int x);
+int third_function(int x);
+
+int fourth_function(int x);
+int fifth_function(int x);
+```
+
+只有通过向编译器传递SIMPLELIB_VERSION_3_0预处理器常量构建的客户端二进制文件，才会包含新的first_function()函数原型。
+
+```bash
+gcc -g -O0 -c -DSIMPLELIB_VERSION_3_0 -I../sharedLib main.c
+gcc main.o -Wl,-L../sharedLib -lsimple \
+           -Wl,-R../sharedLib -o ver3PeerApp 
+```
+
+运行ver3PeerApp将输出如下结果：
+
+```bash
+$ ./ver3PeerApp
+ lib: first_function_3_0
+ lib: second_function
+ lib: fourth_function
+first(1) + second(2) + fourth(4) = 14
+```
+
+如下所示，动态链接库现在新增了一项版本信息。
+
+```bash
+$ readelf -V libsimple.so
+
+Version symbols section '.gnu.version' contains 15 entries:
+ Addr: 0x0000000000000586  Offset: 0x00000586  Link: 4 (.dynsym)
+  000:   0 (*local*)       1 (*global*)      6 (GLIBC_2.2.5)   1 (*global*)
+  004:   1 (*global*)      6 (GLIBC_2.2.5)   3 (LIBSIMPLE_1.1)   2 (LIBSIMPLE_1.0)
+  008:   4 (LIBSIMPLE_2.0)   5 (LIBSIMPLE_3.0)   2 (LIBSIMPLE_1.0)   3 (LIBSIMPLE_1.1)
+  00c:   5 (LIBSIMPLE_3.0)   2h(LIBSIMPLE_1.0)   4h(LIBSIMPLE_2.0)
+
+Version definition section '.gnu.version_d' contains 5 entries:
+ Addr: 0x00000000000005a8  Offset: 0x000005a8  Link: 5 (.dynstr)
+  000000: Rev: 1  Flags: BASE  Index: 1  Cnt: 1  Name: libsimple.so
+  0x001c: Rev: 1  Flags: none  Index: 2  Cnt: 1  Name: LIBSIMPLE_1.0
+  0x0038: Rev: 1  Flags: none  Index: 3  Cnt: 1  Name: LIBSIMPLE_1.1
+  0x0054: Rev: 1  Flags: none  Index: 4  Cnt: 1  Name: LIBSIMPLE_2.0
+  0x0070: Rev: 1  Flags: none  Index: 5  Cnt: 1  Name: LIBSIMPLE_3.0
+
+Version needs section '.gnu.version_r' contains 1 entry:
+ Addr: 0x0000000000000638  Offset: 0x00000638  Link: 5 (.dynstr)
+  000000: Version: 1  File: libc.so.6  Cnt: 1
+  0x0010:   Name: GLIBC_2.2.5  Flags: none  Version: 6
+```
+
+当前导出的符号集合已包含版本1.0和版本1.1和版本2.0以及版本3.0的所有符号，如下所示：
+
+```bash
+$ readelf --wide --dyn-syms libsimple.so
+
+Symbol table '.dynsym' contains 15 entries:
+   Num:    Value          Size Type    Bind   Vis      Ndx Name
+     0: 0000000000000000     0 NOTYPE  LOCAL  DEFAULT  UND
+     1: 0000000000000000     0 NOTYPE  WEAK   DEFAULT  UND _ITM_deregisterTMCloneTable
+     2: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND printf@GLIBC_2.2.5 (6)
+     3: 0000000000000000     0 NOTYPE  WEAK   DEFAULT  UND __gmon_start__
+     4: 0000000000000000     0 NOTYPE  WEAK   DEFAULT  UND _ITM_registerTMCloneTable
+     5: 0000000000000000     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 (6)
+     6: 000000000000122f    53 FUNC    GLOBAL DEFAULT   15 fourth_function@@LIBSIMPLE_1.1
+     7: 0000000000000000     0 OBJECT  GLOBAL DEFAULT  ABS LIBSIMPLE_1.0
+     8: 0000000000000000     0 OBJECT  GLOBAL DEFAULT  ABS LIBSIMPLE_2.0
+     9: 0000000000000000     0 OBJECT  GLOBAL DEFAULT  ABS LIBSIMPLE_3.0
+    10: 00000000000011c5    53 FUNC    GLOBAL DEFAULT   15 second_function@@LIBSIMPLE_1.0
+    11: 0000000000000000     0 OBJECT  GLOBAL DEFAULT  ABS LIBSIMPLE_1.1
+    12: 0000000000001189    60 FUNC    GLOBAL DEFAULT   15 first_function@@LIBSIMPLE_3.0
+    13: 0000000000001119    53 FUNC    GLOBAL DEFAULT   15 first_function@LIBSIMPLE_1.0
+    14: 000000000000114e    59 FUNC    GLOBAL DEFAULT   15 first_function@LIBSIMPLE_2.0
+```
+
+
+#### 参考资料:
+《高级C/C++编译技术》: 10.2.2 基于符号的版本控制方案
+
