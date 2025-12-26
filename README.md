@@ -28,6 +28,7 @@
 - [运行时动态链接](dynamic_library/load_so_by_dlopen)
 - [静态编译](dynamic_library/static_build)
 - [导入完整归档的情况](dynamic_library/build_so_whole_archive)
+- [插件](dynamic_library/plug_in)
 
 
 ### [Linux运行时动态库文件的定位规则](runtime_dynamic_library_location_rules)

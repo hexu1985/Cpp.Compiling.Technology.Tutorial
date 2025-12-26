@@ -7,6 +7,7 @@
 - [运行时动态链接](load_so_by_dlopen)
 - [静态编译](static_build)
 - [导入完整归档的情况](build_so_whole_archive)
+- [插件](plug_in)
 
 
 
