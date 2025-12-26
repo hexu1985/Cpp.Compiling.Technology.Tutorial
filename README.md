@@ -29,6 +29,7 @@
 - [静态编译](dynamic_library/static_build)
 - [导入完整归档的情况](dynamic_library/build_so_whole_archive)
 - [插件](dynamic_library/plug_in)
+- [将动态库转换为可执行文件](dynamic_library/converting_dynamic_library_to_executable)
 
 
 ### [Linux运行时动态库文件的定位规则](runtime_dynamic_library_location_rules)
