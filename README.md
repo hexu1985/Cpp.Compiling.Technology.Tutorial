@@ -66,6 +66,7 @@
 - [示例项目分析：第1阶段（初始版本）](symbol_versioning_scheme/phase_1_initial_version)
 - [示例项目分析：第2阶段（增改次版本号）](symbol_versioning_scheme/phase_2_minor_version_changes)
 - [示例项目分析：第3阶段（主版本变更）](symbol_versioning_scheme/phase_3_major_version_changes)
+- [版本脚本语法概述](symbol_versioning_scheme/version_script_syntax_overview)
 
 
 ### [二进制分析工具集](binary_analysis_toolbox)
