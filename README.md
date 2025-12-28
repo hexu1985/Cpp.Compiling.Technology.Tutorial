@@ -1,4 +1,4 @@
-# C++ Compiling Technology Tutorial
+# Linux C/C++ Compiling Technology Tutorial
 
 ## Table of contents
 
@@ -32,7 +32,7 @@
 - [将动态库转换为可执行文件](dynamic_library/converting_dynamic_library_to_executable)
 
 
-### [Linux运行时动态库文件的定位规则](runtime_dynamic_library_location_rules)
+### [运行时动态库文件的定位规则](runtime_dynamic_library_location_rules)
 
 - [预加载库](runtime_dynamic_library_location_rules/preloaded_libraries)
 - [通过rpath添加加载动态库文件搜索路径](runtime_dynamic_library_location_rules/load_so_by_rpath)
@@ -97,6 +97,4 @@
 - [判断是否为调试构建](binary_analysis/identifying_the_debug_build)
 - [列出加载时依赖项](binary_analysis/listing_load_time_dependencies)
 - [查看运行时动态链接的库文件](binary_analysis/listing_dynamically_linked_libraries)
-
-
 
